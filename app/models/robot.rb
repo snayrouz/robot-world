@@ -17,6 +17,10 @@ class Robot
   end
 
   def self.all
+    robots = database.execute("SELECT * FROM robots")
+    robots.map do |robot|
+      Robot.new(robot)
+    end
   end
 
   def self.database
