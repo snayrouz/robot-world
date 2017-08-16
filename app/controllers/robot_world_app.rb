@@ -5,7 +5,7 @@ class RobotWorldApp < Sinatra::Base
   set :method_override, true
 
   get '/' do
-    erb :index
+    erb :dashboard
   end
 
   get '/robots' do
@@ -20,6 +20,11 @@ class RobotWorldApp < Sinatra::Base
   post '/robots' do
     robot = Robot.new(params[:robot])
     robot.save
+    redirect '/robots'
+  end
+
+  delete '/robots/:id' do
+    Robot.destroy(params[:id].to_i)
     redirect '/robots'
   end
 

@@ -24,7 +24,7 @@ class Robot
   end
 
   def self.database
-    database = SQLite3::Database.new('db/robot_world_app_development')
+    database = SQLite3::Database.new('db/robot_world_development')
     database.results_as_hash = true
     database
   end
