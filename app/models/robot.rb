@@ -24,14 +24,33 @@ class Robot
   end
 
   def self.database
+    database = SQLite3::Database.new('db/robot_world_app_development')
+    database.results_as_hash = true
+    database
   end
 
   def self.find(id)
+    robot = database.execute("SELECT * FROM robots WHERE id = ?", id).first
+    Robot.new(robot)
   end
 
   def self.update(id, params)
+    database.execute("UPDATE robots
+                      SET name = ?,
+                          city = ?,
+                          state = ?,
+                          department = ?
+                      WHERE id = ?;",
+                      params[:name],
+                      params[:city],
+                      params[:state],
+                      params[:department],
+                      id)
+    Robot.find(id)
   end
 
   def self.destroy(id)
+    database.execute("DELETE FROM robots
+                      WHERE id = ?;", id)
   end
 end
