@@ -13,10 +13,11 @@ class Robot
   end
 
   def save
-    @database.execute("INSERT INTO robots (name, city, state, department) VALUES (?, ?, ?, ?)", @name, @city, @state, @department)
+    database.execute("INSERT INTO robots (name, city, state, department) VALUES (?, ?, ?, ?);", @name, @city, @state, @department)
   end
 
   def self.all
+    self.database
     robots = database.execute("SELECT * FROM robots")
     robots.map do |robot|
       Robot.new(robot)
@@ -30,6 +31,7 @@ class Robot
   end
 
   def self.find(id)
+    self.database
     robot = database.execute("SELECT * FROM robots WHERE id = ?", id).first
     Robot.new(robot)
   end

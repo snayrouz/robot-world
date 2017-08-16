@@ -1,0 +1,14 @@
+<a href="/robots">Back to all Robots</a>
+<form action="/robots/<%= @robot.id %>" method="post">
+  <p>Robot Workshop</p>
+  <input type="hidden" name="_method" value="PUT" />
+  <label>Rename</label>
+  <input type="text" name="robot[name]" value="<%= @robot.name %>"/><br/>
+  <label>Relocate</label>
+  <input type="text" name="robot[city]" value="<%= @robot.city %>"/><br/>
+  <label>Relocate Bigger</label>
+  <input type="text" name="robot[state]" value="<%= @robot.state %>"/><br/>
+  <label>Change Department</label>
+  <input type="text" name="robot[department]" value="<%= @robot.department %>"/><br/>
+  <input type="submit"/>
+</form>
