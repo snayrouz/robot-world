@@ -3,10 +3,10 @@ require 'sqlite3'
 class Robot
   attr_reader :id, :name, :city, :state, :department, :database
   def initialize(params)
-    @id = params["id"]
-    @name = params["name"]
-    @city = params["city"]
-    @state = params["state"]
+    @id         = params["id"] if params["id"]
+    @name       = params["name"]
+    @city       = params["city"]
+    @state      = params["state"]
     @department = params["department"]
     @database = SQLite3::Database.new('db/robot_world_development.db')
     @database.results_as_hash = true
@@ -25,7 +25,7 @@ class Robot
   end
 
   def self.database
-    database = SQLite3::Database.new('db/robot_world_development')
+    database = SQLite3::Database.new('db/robot_world_development.db')
     database.results_as_hash = true
     database
   end
